@@ -6,19 +6,21 @@ app = Flask(__name__)
 
 # Daftar lomba yang tersedia
 COMPETITIONS = [
-    "Makan Kerupuk",
-    "Esport ML", 
-    "Sarung Smash",
-    "Masak",
-    "Balap Karung",
-    "Tarik Tambang",
-    "Panjat Pinang",
-    "Lomba Minum",
+    "Estafet Kelereng",
+    "Bola Dan Pipa",
+    "Nyanyi",
+    "Estafet Air",
     "Fashion Show",
-    "Menyanyi",
-    "Dance",
-    "Drama"
+    "Makan Kerupuk",
+    "Susun Kata",
+    "Buah Berhadiah",
+    "Sarung Smash",
+    "Siapa Cepat Dapat Kursi",
+    "Workshop Lukis Totebag",
+    "Masak",
+    "Cerpen"
 ]
+
 
 # Inisialisasi database
 def init_db():
