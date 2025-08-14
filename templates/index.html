@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakwala Winners | OSIS SMA IGS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/images/valiancelogo.png') }}" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Rakwala Winners</h1>
+        </header>
+
+        <!-- TOP 5 Kelas dengan Juara Terbanyak -->
+        <section class="class-analysis">
+            <h2>👑 TOP 5 Kelas dengan Juara Terbanyak</h2>
+            {% if top_classes %}
+                <div class="competition-card">
+                    <div class="card-header">
+                        <h3>🏆 Ranking Kelas Terbaik</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="winners-list">
+                            {% for class_name, total in top_classes %}
+                                {% set rank = loop.index %}
+                                <div class="winner-item position-{{ rank }}">
+                                    <div class="position">
+                                        {% if rank == 1 %}🥇
+                                        {% elif rank == 2 %}🥈
+                                        {% elif rank == 3 %}🥉
+                                        {% elif rank == 4 %}4️⃣
+                                        {% elif rank == 5 %}5️⃣
+                                        {% endif %}
+                                    </div>
+                                    <div class="winner-info">
+                                        <div class="winner-name">{{ class_name }}</div>
+                                        <div class="winner-class">{{ total }} Total Juara</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="no-data-card">
+                    <p class="no-data">Belum ada data juara yang tersedia</p>
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- Leaderboard Lomba -->
+        <section class="competitions">
+            <h2>🏅 Daftar Leaderboard Lomba</h2>
+            <div class="competitions-grid">
+                {% if competitions %}
+                    {% for competition_name, winners in competitions.items() %}
+                    <div class="competition-card">
+                        <div class="card-header">
+                            <h3>{{ competition_name }}</h3>
+                        </div>
+                        <div class="card-body">
+                            {% if winners %}
+                                <div class="winners-list">
+                                    {% for winner in winners %}
+                                    <div class="winner-item position-{{ winner.position }}">
+                                        <div class="position">
+                                            {% if winner.position == 1 %}🥇
+                                            {% elif winner.position == 2 %}🥈
+                                            {% elif winner.position == 3 %}🥉
+                                            {% else %}{{ winner.position }}{% endif %}
+                                        </div>
+                                        <div class="winner-info">
+                                            <div class="winner-name">{{ winner.name }}</div>
+                                            <div class="winner-class">{{ winner.class_name }}</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="no-winners">Belum ada pemenang</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-competitions">
+                        <p>Belum ada lomba yang terdaftar</p>
+                        <!-- <a href="/admin" class="btn btn-primary">Tambah Lomba</a> -->
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 OSIS SMA IGS</p>
+    </footer>
+</body>
+</html>

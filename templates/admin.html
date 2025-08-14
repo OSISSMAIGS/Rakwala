@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Rakwala Winners</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/images/valiancelogo.png') }}" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚙️ Admin Panel</h1>
+            <nav>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/admin" class="nav-link active">Admin Panel</a>
+            </nav>
+        </header>
+
+        <div class="admin-content">
+            <!-- Form Kelola Pemenang -->
+            <section class="form-section">
+                <h2>🏆 Kelola Pemenang Lomba</h2>
+                <form action="/add_winners" method="POST" class="form-card" id="winnersForm">
+                    <div class="form-group">
+                        <label for="competition">Pilih Lomba:</label>
+                        <select id="competition" name="competition" required>
+                            <option value="">-- Pilih Lomba --</option>
+                            {% for comp in competitions %}
+                            <option value="{{ comp }}">{{ comp }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="winners-section">
+                        <div class="section-header">
+                            <h3>Daftar Pemenang</h3>
+                            <button type="button" id="addWinnerBtn" class="btn btn-primary">
+                                Tambahkan Pemenang
+                            </button>
+                        </div>
+                        
+                        <div id="winnersContainer">
+                            <!-- Winner entries akan ditambahkan di sini via JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Simpan Semua Pemenang</button>
+                        <button type="button" id="clearForm" class="btn btn-warning">Clear Form</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Preview Pemenang -->
+            <section class="preview-section" id="previewSection" style="display: none;">
+                <h2>👀 Preview Pemenang</h2>
+                <div class="preview-card">
+                    <div id="previewContent"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 OSIS SMA IGS</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+</body>
+</html>
